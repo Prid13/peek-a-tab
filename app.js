@@ -2,7 +2,8 @@
  * Created by pramj on 1/9/2017.
  */
 
-const THIS_VERSION = "1.5.6";
+const THIS_VERSION = "1.5.5";
+const incognitoIconUrl = "images/incognito_icon.png";
 
 document.addEventListener("DOMContentLoaded", function() {
   var activeWindowId = window.location.search.substr(1);
@@ -118,12 +119,19 @@ document.addEventListener("DOMContentLoaded", function() {
     }
   }
 
-  function changeActiveWindowTitle(oldWinId, newWinId) {
-    oldWin = document.getElementById(oldWinId);
-    oldWin.textContent = "Window " + oldWin.dataset.nr;
-
-    newWin = document.getElementById(newWinId);
-    newWin.textContent = "Window " + newWin.dataset.nr + " (current)";
+  function changeActiveWindowTitle(oldWinId, newWinId){
+    oldWin = document.getElementById(oldWinId)
+    oldWin.textContent = "Window " + oldWin.dataset.nr
+    
+    newWin = document.getElementById(newWinId)
+    newWin.textContent = "Window " + newWin.dataset.nr + " (current)"
+    
+    // check if window is incognito, and if so, append icon
+    if(oldWin.dataset.incognito)
+      addIncognitoIcon(oldWin)
+      
+    if(newWin.dataset.incognito)
+      addIncognitoIcon(newWin)
   }
 
   function changeActiveTabAndCloseWindow(tab) {
@@ -186,6 +194,13 @@ document.addEventListener("DOMContentLoaded", function() {
 
     makeTabIndexActive(tabEls.length - 1);
   }
+  
+  function addIncognitoIcon(winTitleEl){
+    var winImgEl = document.createElement("img");
+    winImgEl.classList.add("icon", "incognito");
+    winImgEl.src = incognitoIconUrl;
+    winTitleEl.appendChild(winImgEl);
+  }
 
   /**
    * get all tabs from all windows and populates the list
@@ -203,13 +218,19 @@ document.addEventListener("DOMContentLoaded", function() {
 
       for (var i = 0; i < windows.length; i++) {
         var aWindow = windows[i];
-        var isActiveWindowText =
-          activeWindowId == aWindow.id ? " (current)" : "";
+        var isIncognito = aWindow.incognito;
+        var isActiveWindowText = (activeWindowId == aWindow.id ? " (current)" : "")
         var windowTitle = document.createElement("li");
         windowTitle.classList.add("window-text");
-        windowTitle.id = aWindow.id;
-        windowTitle.dataset.nr = i + 1;
-        windowTitle.textContent = "Window " + (i + 1) + isActiveWindowText;
+        windowTitle.id = aWindow.id
+        windowTitle.dataset.nr = i + 1
+        windowTitle.textContent = "Window " + (i + 1) + isActiveWindowText
+        
+        if(isIncognito){
+          addIncognitoIcon(windowTitle);
+          windowTitle.dataset.incognito = true;
+        }
+        
         tabsListEl.appendChild(windowTitle);
 
         for (var j = 0; j < aWindow.tabs.length; j++) {
