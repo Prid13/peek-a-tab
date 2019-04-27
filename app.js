@@ -2,7 +2,7 @@
  * Created by pramj on 1/9/2017.
  */
 
-const THIS_VERSION = "1.5.5";
+const THIS_VERSION = "1.5.6";
 const incognitoIconUrl = "images/incognito_icon.png";
 
 document.addEventListener("DOMContentLoaded", function() {
