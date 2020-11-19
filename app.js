@@ -9,7 +9,6 @@ document.addEventListener("DOMContentLoaded", function() {
   var activeWindowId = window.location.search.substr(1);
   var peekATabWindowId = null;
   var closeOnFocusChange = true;
-  var specialKeyword = false;
 
   var activeTabElement = null;
 
@@ -20,8 +19,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
   // searchInput.focus()
   searchInput.addEventListener("input", function() {
-    if(!specialKeywords())
-      populateTabs();
+    populateTabs();
   });
   //save width changes
   window.addEventListener("resize", function(event) {
@@ -238,15 +236,7 @@ document.addEventListener("DOMContentLoaded", function() {
         for (var j = 0; j < aWindow.tabs.length; j++) {
           var tab = aWindow.tabs[j];
 
-          if(specialKeyword != false) {
-            switch(specialKeyword){
-              case 'incognito':
-                                if(!isIncognito) continue;
-                                break;
-                                
-              default: break;
-            }
-          } else if (
+          if (
             searchInput.value.trim() != "" &&
             tab.title
               .toLowerCase()
@@ -370,22 +360,6 @@ document.addEventListener("DOMContentLoaded", function() {
         populateTabs();
     }
   };
-  
-  // special keywords in the search bar to perform extra actions
-  function specialKeywords() {
-    var input = searchInput.value.trim().toLowerCase();
-    
-    if(input.endsWith(':incognito')){
-      specialKeyword = "incognito";
-    } else {
-      specialKeyword = false;
-      return false;
-    }
-    
-    populateTabs();
-    
-    return true;
-  }
 
   var mouseBehaviorImage = document.getElementById("mouse-behavior-image");
 
