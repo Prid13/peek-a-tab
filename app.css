@@ -272,10 +272,27 @@ body {
     box-sizing: border-box;
 }
 
-.incognito {
+.incognito-color {
+	background-color: #292929;
+	color: white;
+	outline-color: #5a9cff;
+}
+.incognito-color.tab.active {
+	background-color: #0763a5;
+	color: #e0f2ff;
+}
+.incognito-icon {
     float: none;
     vertical-align: middle;
     margin-left: 8px;
+}
+.incognito-tab {
+	margin: 0;
+	border-radius: 0;
+}
+.incognito-header {
+	margin: 0;
+	padding: 10px;
 }
 
 .title {

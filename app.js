@@ -2,8 +2,8 @@
  * Created by pramj on 1/9/2017.
  */
 
-const THIS_VERSION = "1.5.6";
-const incognitoIconUrl = "images/incognito_icon.png";
+const THIS_VERSION = "1.5.7";
+const incognitoIconUrl = "images/incognito_icon_white.png";
 
 document.addEventListener("DOMContentLoaded", function() {
   var activeWindowId = window.location.search.substr(1);
@@ -197,7 +197,7 @@ document.addEventListener("DOMContentLoaded", function() {
   
   function addIncognitoIcon(winTitleEl){
     var winImgEl = document.createElement("img");
-    winImgEl.classList.add("icon", "incognito");
+    winImgEl.classList.add("icon", "incognito-icon");
     winImgEl.src = incognitoIconUrl;
     winTitleEl.appendChild(winImgEl);
   }
@@ -229,6 +229,7 @@ document.addEventListener("DOMContentLoaded", function() {
         if(isIncognito){
           addIncognitoIcon(windowTitle);
           windowTitle.dataset.incognito = true;
+		  windowTitle.classList.add("incognito-color", "incognito-header");
         }
         
         tabsListEl.appendChild(windowTitle);
@@ -253,6 +254,7 @@ document.addEventListener("DOMContentLoaded", function() {
           tabEl.dataset.id = tab.id;
           tabEl.tabIndex = 0;
           tabEl.id = tab.id;
+		  if(isIncognito) tabEl.classList.add("incognito-color", "incognito-tab");
 
           var tabImgEl = document.createElement("img");
           tabImgEl.classList.add("icon");
