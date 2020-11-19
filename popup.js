@@ -22,8 +22,8 @@ document.addEventListener('DOMContentLoaded', function () {
 					'focused': true,
 					'width': width,
 					'height': (win.height - 10),
-					'left': window.screenLeft,
-					'top': (window.screenTop - 70)
+					'left': win.width,
+					'top': (win.height - 70)
 				});
 
                 window.close(); // close the Chrome extension pop-up
