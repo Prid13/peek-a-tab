@@ -32,6 +32,14 @@ document.addEventListener("DOMContentLoaded", function() {
       windowWidth: widthToStore
     });
   });
+  
+  function initTippy(){
+    tippy('[data-tippy-content]', {
+      
+      maxWidth: 1200,
+      allowHTML: true
+    });
+  }
 
   function highlight(text, textToHighlight) {
     if (textToHighlight.length > 0)
@@ -263,6 +271,12 @@ document.addEventListener("DOMContentLoaded", function() {
           var tabTitleEl = document.createElement("p");
           tabTitleEl.classList.add("title");
           tabTitleEl.innerHTML = highlight(tab.title, searchInput.value);
+		  
+		  var tabInfoEl = document.createElement("img");
+          tabInfoEl.title = "info";
+          tabInfoEl.classList.add("info-icon");
+          tabInfoEl.src = "images/info.png";
+		  tabInfoEl.setAttribute('data-tippy-content', "<b>" + tab.title + "</b>" + "<br>" + tab.url);
 
           var tabCrossEl = document.createElement("img");
           tabCrossEl.title = "close";
@@ -308,6 +322,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
           tabEl.appendChild(tabImgEl);
           tabEl.appendChild(tabTitleEl);
+          tabEl.appendChild(tabInfoEl);
           tabEl.appendChild(tabCrossEl);
           tabsListEl.appendChild(tabEl);
 
@@ -316,6 +331,9 @@ document.addEventListener("DOMContentLoaded", function() {
           }
         }
       }
+	  
+	  initTippy();
+	  
     });
   }
 
@@ -455,3 +473,7 @@ document.addEventListener("DOMContentLoaded", function() {
     }
   });
 });
+
+
+// CREDITS:
+// info icon made by Alfredo Hernandez (https://www.alfredocreates.com) from www.flaticon.com

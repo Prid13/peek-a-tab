@@ -311,6 +311,19 @@ body {
     padding: 2px;
 }
 
+.info-icon {
+    position: absolute;
+    top: 6px;
+    right: 28px;
+    height: 20px;
+    padding: 3px;
+    background-color: #54b3e0;
+    cursor: pointer;
+    border-radius: 50%;
+    box-sizing: border-box;
+    display: none;
+}
+
 .close-icon {
     position: absolute;
     top: 6px;
@@ -324,11 +337,11 @@ body {
     display: none;
 }
 
-.tab:hover .close-icon {
+.tab:hover .close-icon, .tab:hover .info-icon {
     display: block;
 }
 
-.tab.active .close-icon {
+.tab.active .close-icon, .tab:active .close-icon {
     display: block;
 }
 
@@ -383,4 +396,11 @@ body {
 
 #announcement-container.visible {
     transform: translateY(0)
+}
+
+/***** Tippy.js Styling *****/
+.tippy-box {
+	background-color: rgba(0, 0, 0, 0.9);
+	font-size: 1.1em;
+	word-break: break-all;
 }
